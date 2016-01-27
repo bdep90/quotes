@@ -18,26 +18,24 @@ app.use(express.static(__dirname + '/public'));
 const port = process.env.PORT || 3000;
 
 // database
-// mongoose.connect('mongodb://localhost:...');
+mongoose.connect('mongodb://localhost:27017/quotes');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', () => {
   console.log('mongoose connected');
 });
 
-// logger
+// logger & parser
 app.use(logger('dev'));
-
-// parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(override('X-HTTP-Method-Override'));
 
 
 // ==== routes ====
-app.get('/', (req, res) => {
-  console.log('Root route hit');
-});
+// app.get('/', (req, res) => {
+//   console.log('Root route hit');
+// });
 // app.use('/', ?);
 
 
