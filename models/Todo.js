@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // ==== model ====
-let todoSchema = mongoose.Schema({
+let todoSchema = new mongoose.Schema({
   text: String,
   createdAt: { type: Date }
 });

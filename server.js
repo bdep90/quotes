@@ -6,13 +6,11 @@ const bodyParser = require('body-parser');
 const logger     = require('morgan');
 const override   = require('method-override');
 const app        = express();
-// models
-// const ? = require('./routes/?')
 
 
 // ==== configuration ====
 // config files
-app.use(express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 
 // port
 const port = process.env.PORT || 3000;
@@ -32,11 +30,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(override('X-HTTP-Method-Override'));
 
 
-// ==== routes ====
-// app.get('/', (req, res) => {
+// ==== access to routes ====
+const todoRoutes = require('./routes/todoRoutes');
+app.use('/', todoRoutes);
+// app.get('*', (req, res) => {
 //   console.log('Root route hit');
+//   res.sendFile('./public/index.html');
 // });
-// app.use('/', ?);
 
 
 // ==== server ====
